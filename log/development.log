@@ -1,0 +1,389 @@
+Started GET "/" for 127.0.0.1 at 2026-03-25 21:13:50 +0100
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='TimeBank'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering C:/Ruby40-x64/lib/ruby/gems/4.0.0/gems/railties-8.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered C:/Ruby40-x64/lib/ruby/gems/4.0.0/gems/railties-8.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.0ms | GC: 0.0ms)
+Completed 200 OK in 865ms (Views: 172.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (4.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2026-03-25 20:15:44.456739', '2026-03-25 20:15:44.456751') RETURNING "key" /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+Migrating to CreateUsers (20260325201503)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='TimeBank'*/[0m
+  [1m[35m (7.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "password_digest" varchar, "role" varchar, "balance" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20260325201503') RETURNING "version" /*application='TimeBank'*/[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+Started GET "/" for 127.0.0.1 at 2026-03-25 21:16:36 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering C:/Ruby40-x64/lib/ruby/gems/4.0.0/gems/railties-8.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered C:/Ruby40-x64/lib/ruby/gems/4.0.0/gems/railties-8.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.7ms | GC: 0.0ms)
+Completed 200 OK in 31ms (Views: 5.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2026-03-25 21:16:37 +0100
+Processing by Rails::WelcomeController#index as HTML
+  Rendering C:/Ruby40-x64/lib/ruby/gems/4.0.0/gems/railties-8.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered C:/Ruby40-x64/lib/ruby/gems/4.0.0/gems/railties-8.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.2ms | GC: 0.0ms)
+Completed 200 OK in 21ms (Views: 3.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2026-03-25 21:24:34 +0100
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 5.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 69.9ms | GC: 15.6ms)
+Completed 200 OK in 1016ms (Views: 88.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 31.3ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2026-03-25 21:24:39 +0100
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 256.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 260.3ms | GC: 0.0ms)
+Completed 200 OK in 331ms (Views: 272.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2026-03-25 21:25:17 +0100
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | GC: 0.0ms)
+Completed 200 OK in 25ms (Views: 7.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2026-03-25 21:25:36 +0100
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 1.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.5ms | GC: 0.0ms)
+Completed 200 OK in 28ms (Views: 8.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2026-03-25 21:25:52 +0100
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "name" => "test", "email" => "[FILTERED]", "password" => "[FILTERED]"}
+Completed 500 Internal Server Error in 229ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+LoadError (cannot load such file -- bcrypt):
+  
+app/models/user.rb:2:in '<class:User>'
+app/models/user.rb:1:in '<main>'
+app/controllers/users_controller.rb:6:in 'UsersController#create'
+Started GET "/register" for 127.0.0.1 at 2026-03-25 21:29:38 +0100
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 2.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.5ms | GC: 0.0ms)
+Completed 200 OK in 29ms (Views: 8.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2026-03-25 21:29:49 +0100
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "name" => "test", "email" => "[FILTERED]", "password" => "[FILTERED]"}
+Completed 500 Internal Server Error in 374ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+LoadError (cannot load such file -- bcrypt):
+  
+app/models/user.rb:2:in '<class:User>'
+app/models/user.rb:1:in '<main>'
+app/controllers/users_controller.rb:6:in 'UsersController#create'
+Started GET "/register" for 127.0.0.1 at 2026-03-25 21:29:58 +0100
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 1.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.4ms | GC: 0.0ms)
+Completed 200 OK in 27ms (Views: 8.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2026-03-26 07:36:41 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 249.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 633.9ms | GC: 0.0ms)
+Completed 200 OK in 2791ms (Views: 867.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2026-03-26 07:37:02 +0100
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 2.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.6ms | GC: 0.0ms)
+Completed 200 OK in 83ms (Views: 21.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2026-03-26 07:37:13 +0100
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "name" => "bella", "email" => "[FILTERED]", "password" => "[FILTERED]"}
+[31mUnpermitted parameter: :authenticity_token. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x000001563003a8e0>, params: {"authenticity_token" => "[FILTERED]", "name" => "bella", "email" => "[FILTERED]", "password" => "[FILTERED]", "controller" => "users", "action" => "create"} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='TimeBank',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:10:in 'UsersController#create'
+  [1m[36mUser Create (7.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "role", "balance", "created_at", "updated_at") VALUES ('bella', 'izabelamartirosyan777@gmail.com', '$2a$12$DKIT0uX6iFaXCBpksFjIcehhFqMqVA3GHOrml8wfUrNKaSksLTQYC', 'user', 10, '2026-03-26 06:37:14.108775', '2026-03-26 06:37:14.108775') RETURNING "id" /*action='create',application='TimeBank',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:10:in 'UsersController#create'
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='TimeBank',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:10:in 'UsersController#create'
+Redirected to http://127.0.0.1:3000/login
+↳ app/controllers/users_controller.rb:11:in 'UsersController#create'
+Completed 302 Found in 822ms (ActiveRecord: 23.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2026-03-26 07:37:14 +0100
+Processing by SessionsController#new as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.3ms | GC: 0.0ms)
+Completed 200 OK in 35ms (Views: 6.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2026-03-26 07:37:20 +0100
+Processing by SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "email" => "[FILTERED]", "password" => "[FILTERED]"}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'izabelamartirosyan777@gmail.com' LIMIT 1 /*action='create',application='TimeBank',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:6:in 'SessionsController#create'
+Redirected to http://127.0.0.1:3000/profile
+↳ app/controllers/sessions_controller.rb:10:in 'SessionsController#create'
+Completed 302 Found in 1187ms (ActiveRecord: 1.7ms (1 query, 0 cached) | GC: 31.3ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2026-03-26 07:37:21 +0100
+Processing by PagesController#profile as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering pages/profile.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='profile',application='TimeBank',controller='pages'*/[0m
+  ↳ app/views/pages/profile.html.erb:5
+  Rendered pages/profile.html.erb within layouts/application (Duration: 31.7ms | GC: 31.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 34.9ms | GC: 31.3ms)
+Completed 200 OK in 133ms (Views: 59.1ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 31.3ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2026-03-26 07:39:49 +0100
+Processing by PagesController#profile as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/profile.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='profile',application='TimeBank',controller='pages'*/[0m
+  ↳ app/views/pages/profile.html.erb:5
+  Rendered pages/profile.html.erb within layouts/application (Duration: 45.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 69.5ms | GC: 0.0ms)
+Completed 200 OK in 170ms (Views: 82.4ms | ActiveRecord: 7.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2026-03-26 07:39:52 +0100
+Processing by PagesController#profile as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/profile.html.erb within layouts/application
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='profile',application='TimeBank',controller='pages'*/[0m
+  ↳ app/views/pages/profile.html.erb:5
+  Rendered pages/profile.html.erb within layouts/application (Duration: 13.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 24.6ms | GC: 0.0ms)
+Completed 200 OK in 61ms (Views: 30.7ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+Migrating to CreateServices (20260326064049)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='TimeBank'*/[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "services" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "description" text, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_51a813203f"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='TimeBank'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_services_on_user_id" ON "services" ("user_id") /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20260326064049') RETURNING "version" /*application='TimeBank'*/[0m
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+Started GET "/services" for ::1 at 2026-03-26 07:44:27 +0100
+  
+NoMethodError (undefined method 'resources' for main):
+  
+config/routes.rb:18:in '<main>'
+Started GET "/favicon.ico" for ::1 at 2026-03-26 07:44:30 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/services" for ::1 at 2026-03-26 07:45:35 +0100
+Processing by ServicesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering services/index.html.erb within layouts/application
+  [1m[36mService Load (5.2ms)[0m  [1m[34mSELECT "services".* FROM "services" /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:6
+  Rendered services/index.html.erb within layouts/application (Duration: 13.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 35.4ms | GC: 0.0ms)
+Completed 200 OK in 205ms (Views: 46.1ms | ActiveRecord: 5.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/services/new" for ::1 at 2026-03-26 07:45:38 +0100
+Processing by ServicesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering services/new.html.erb within layouts/application
+  Rendered services/new.html.erb within layouts/application (Duration: 2.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.3ms | GC: 15.6ms)
+Completed 200 OK in 78ms (Views: 13.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 15.6ms)
+
+
+Started POST "/services" for ::1 at 2026-03-26 07:47:03 +0100
+Processing by ServicesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "title" => "տեստ", "description" => "տեստ"}
+[31mUnpermitted parameter: :authenticity_token. Context: { controller: ServicesController, action: create, request: #<ActionDispatch::Request:0x000001562b5037a0>, params: {"authenticity_token" => "[FILTERED]", "title" => "տեստ", "description" => "տեստ", "controller" => "services", "action" => "create"} }[0m
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:13:in 'ServicesController#create'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[31mROLLBACK TRANSACTION /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:13:in 'ServicesController#create'
+  Rendering layout layouts/application.html.erb
+  Rendering services/new.html.erb within layouts/application
+  Rendered services/new.html.erb within layouts/application (Duration: 1.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.3ms | GC: 0.0ms)
+Completed 200 OK in 869ms (Views: 13.8ms | ActiveRecord: 20.0ms (0 queries, 0 cached) | GC: 78.1ms)
+
+
+Started POST "/services" for ::1 at 2026-03-26 09:20:35 +0100
+Processing by ServicesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "title" => "տեստ", "description" => "տեստ"}
+[31mUnpermitted parameter: :authenticity_token. Context: { controller: ServicesController, action: create, request: #<ActionDispatch::Request:0x000001563053c960>, params: {"authenticity_token" => "[FILTERED]", "title" => "տեստ", "description" => "տեստ", "controller" => "services", "action" => "create"} }[0m
+  Rendering layout layouts/application.html.erb
+  Rendering services/new.html.erb within layouts/application
+  Rendered services/new.html.erb within layouts/application (Duration: 3.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 41.4ms | GC: 0.0ms)
+Completed 200 OK in 208ms (Views: 53.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/%D5%AC%D6%85%D5%A3%D5%AB%D5%B6" for ::1 at 2026-03-26 09:21:59 +0100
+  
+ActionController::RoutingError (No route matches [GET] "/%D5%AC%D6%85%D5%A3%D5%AB%D5%B6"):
+  
+Started GET "/login" for ::1 at 2026-03-26 09:22:04 +0100
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 4.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.3ms | GC: 0.0ms)
+Completed 200 OK in 53ms (Views: 26.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2026-03-26 09:22:11 +0100
+Processing by SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "email" => "[FILTERED]", "password" => "[FILTERED]"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'izabelamartirosyan777@gmail.com' LIMIT 1 /*action='create',application='TimeBank',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:6:in 'SessionsController#create'
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.0ms | GC: 0.0ms)
+Completed 200 OK in 684ms (Views: 9.8ms | ActiveRecord: 22.3ms (1 query, 0 cached) | GC: 31.3ms)
+
+
+Started POST "/login" for ::1 at 2026-03-26 09:22:16 +0100
+Processing by SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "email" => "[FILTERED]", "password" => "[FILTERED]"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'izabelamartirosyan777@gmail.com' LIMIT 1 /*action='create',application='TimeBank',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:6:in 'SessionsController#create'
+Redirected to http://localhost:3000/profile
+↳ app/controllers/sessions_controller.rb:10:in 'SessionsController#create'
+Completed 302 Found in 603ms (ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/profile" for ::1 at 2026-03-26 09:22:17 +0100
+Processing by PagesController#profile as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering pages/profile.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='profile',application='TimeBank',controller='pages'*/[0m
+  ↳ app/views/pages/profile.html.erb:5
+  Rendered pages/profile.html.erb within layouts/application (Duration: 14.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 21.4ms | GC: 0.0ms)
+Completed 200 OK in 61ms (Views: 34.9ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/profile/service/new" for ::1 at 2026-03-26 09:22:24 +0100
+  
+ActionController::RoutingError (No route matches [GET] "/profile/service/new"):
+  
+Started GET "/service/new" for ::1 at 2026-03-26 09:22:29 +0100
+  
+ActionController::RoutingError (No route matches [GET] "/service/new"):
+  
+Started GET "/service/new" for ::1 at 2026-03-26 09:22:33 +0100
+  
+ActionController::RoutingError (No route matches [GET] "/service/new"):
+  
+Started GET "/services/new" for ::1 at 2026-03-26 09:22:46 +0100
+Processing by ServicesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering services/new.html.erb within layouts/application
+  Rendered services/new.html.erb within layouts/application (Duration: 3.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.4ms | GC: 0.0ms)
+Completed 200 OK in 29ms (Views: 10.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/services" for ::1 at 2026-03-26 09:22:52 +0100
+Processing by ServicesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "title" => "test", "description" => "test"}
+[31mUnpermitted parameter: :authenticity_token. Context: { controller: ServicesController, action: create, request: #<ActionDispatch::Request:0x00000156338b5fa8>, params: {"authenticity_token" => "[FILTERED]", "title" => "test", "description" => "test", "controller" => "services", "action" => "create"} }[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:13:in 'ServicesController#create'
+  [1m[36mUser Load (10.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:13:in 'ServicesController#create'
+  [1m[36mService Create (1.0ms)[0m  [1m[32mINSERT INTO "services" ("title", "description", "user_id", "created_at", "updated_at") VALUES ('test', 'test', 1, '2026-03-26 08:22:53.398769', '2026-03-26 08:22:53.398769') RETURNING "id" /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:13:in 'ServicesController#create'
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:13:in 'ServicesController#create'
+Redirected to http://localhost:3000/services
+↳ app/controllers/services_controller.rb:14:in 'ServicesController#create'
+Completed 302 Found in 855ms (ActiveRecord: 16.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/services" for ::1 at 2026-03-26 09:22:53 +0100
+Processing by ServicesController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering services/index.html.erb within layouts/application
+  [1m[36mService Load (0.4ms)[0m  [1m[34mSELECT "services".* FROM "services" /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:6
+  Rendered services/index.html.erb within layouts/application (Duration: 7.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.2ms | GC: 0.0ms)
+Completed 200 OK in 34ms (Views: 16.2ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/services/new" for ::1 at 2026-03-26 09:22:55 +0100
+Processing by ServicesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering services/new.html.erb within layouts/application
+  Rendered services/new.html.erb within layouts/application (Duration: 1.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | GC: 0.0ms)
+Completed 200 OK in 31ms (Views: 8.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/services/new" for ::1 at 2026-03-26 09:22:58 +0100
+Processing by ServicesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering services/new.html.erb within layouts/application
+  Rendered services/new.html.erb within layouts/application (Duration: 2.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.8ms | GC: 0.0ms)
+Completed 200 OK in 29ms (Views: 10.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2026-03-26 15:52:18 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 315.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 786.6ms | GC: 0.0ms)
+Completed 200 OK in 2861ms (Views: 1079.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+

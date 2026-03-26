@@ -1,0 +1,10 @@
+<h2>Services</h2>
+
+<a class="btn btn-success mb-3" href="/services/new">Add Service</a>
+
+<% @services.each do |service| %>
+  <div class="card mb-2 p-2">
+    <h5><%= service.title %></h5>
+    <p><%= service.description %></p>
+  </div>
+<% end %>

@@ -1,0 +1,12 @@
+<h2>Login</h2>
+
+<form action="/login" method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+  <input class="form-control mb-2" type="email" name="email" placeholder="Email">
+  <input class="form-control mb-2" type="password" name="password" placeholder="Password">
+
+  <button class="btn btn-success">Login</button>
+</form>
+
+<a href="/register">Create account</a>
