@@ -1,0 +1,23 @@
+<h2>Edit Profile</h2>
+
+<% if current_user.errors.any? %>
+  <div class="alert alert-danger">
+    <ul class="mb-0">
+      <% current_user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<form action="/profile" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+  <input class="form-control mb-2" type="text" name="user[name]" placeholder="Name" value="<%= current_user.name %>">
+  <input class="form-control mb-2" type="email" name="user[email]" placeholder="Email" value="<%= current_user.email %>">
+  <input class="form-control mb-2" type="password" name="user[password]" placeholder="New password (leave blank to keep current)">
+
+  <button class="btn btn-primary">Save changes</button>
+  <a href="/profile" class="btn btn-secondary ms-2">Cancel</a>
+</form>

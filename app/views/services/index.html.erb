@@ -1,10 +1,39 @@
 <h2>Services</h2>
 
-<a class="btn btn-success mb-3" href="/services/new">Add Service</a>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <a class="btn btn-success" href="/services/new">Offer a Service</a>
 
-<% @services.each do |service| %>
-  <div class="card mb-2 p-2">
-    <h5><%= service.title %></h5>
-    <p><%= service.description %></p>
-  </div>
+  <form action="/services" method="get" class="d-flex gap-2">
+    <input class="form-control" type="text" name="q" value="<%= params[:q] %>" placeholder="Search services...">
+    <button class="btn btn-outline-secondary">Search</button>
+    <% if params[:q].present? %>
+      <a class="btn btn-outline-danger" href="/services">Clear</a>
+    <% end %>
+  </form>
+</div>
+
+<% if @services.empty? %>
+  <p class="text-muted">No services found.</p>
+<% else %>
+  <% @services.each do |service| %>
+    <div class="card mb-2 p-3">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h5><a href="/services/<%= service.id %>"><%= service.title %></a></h5>
+          <p class="text-muted mb-1"><%= service.description %></p>
+          <small>Offered by <strong><%= service.user.name %></strong> &middot; <%= service.duration %> credit(s)</small>
+        </div>
+        <% if service.user == current_user || current_user.role == "admin" %>
+          <div class="d-flex gap-2 align-items-start">
+            <a href="/services/<%= service.id %>/edit" class="btn btn-sm btn-outline-primary">Edit</a>
+            <form action="/services/<%= service.id %>" method="post">
+              <input type="hidden" name="_method" value="delete">
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+              <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this service?')">Delete</button>
+            </form>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 <% end %>

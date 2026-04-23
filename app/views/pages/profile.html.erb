@@ -1,11 +1,11 @@
+<h2>Welcome, <%= current_user.name %></h2>
 
-<h2>Welcome</h2>
+<div class="card mt-3" style="max-width: 480px;">
+  <div class="card-body">
+    <p class="mb-1"><strong>Email:</strong> <%= current_user.email %></p>
+    <p class="mb-1"><strong>Balance:</strong> <%= current_user.balance %> credit(s)</p>
+    <p class="mb-0"><strong>Role:</strong> <%= current_user.role.capitalize %></p>
+  </div>
+</div>
 
-<p>Your balance: <%= User.find(session[:user_id]).balance %></p>
-
-<form action="/logout" method="post">
-  <input type="hidden" name="_method" value="delete">
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-
-  <button class="btn btn-danger">Logout</button>
-</form>
+<a href="/profile/edit" class="btn btn-primary mt-3">Edit Profile</a>

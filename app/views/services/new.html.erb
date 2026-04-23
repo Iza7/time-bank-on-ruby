@@ -1,11 +1,22 @@
+<h2>Offer a Service</h2>
 
-<h2>Create Service</h2>
+<% if @service.errors.any? %>
+  <div class="alert alert-danger">
+    <ul class="mb-0">
+      <% @service.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <form action="/services" method="post">
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
-  <input class="form-control mb-2" type="text" name="title" placeholder="Title">
-  <textarea class="form-control mb-2" name="description" placeholder="Description"></textarea>
+  <input class="form-control mb-2" type="text"   name="service[title]"       placeholder="Title" value="<%= @service.title %>">
+  <textarea class="form-control mb-2"             name="service[description]" placeholder="Description" rows="4"><%= @service.description %></textarea>
+  <input class="form-control mb-2" type="number" name="service[duration]"    placeholder="Duration (hours / credits)" min="1" value="<%= @service.duration || 1 %>">
 
-  <button class="btn btn-primary">Create</button>
+  <button class="btn btn-primary">Create Service</button>
+  <a href="/services" class="btn btn-secondary ms-2">Cancel</a>
 </form>

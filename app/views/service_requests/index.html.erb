@@ -1,0 +1,37 @@
+<h2>Service Requests</h2>
+
+<h4 class="mt-4">Incoming — Requests for My Services</h4>
+<% if @incoming.empty? %>
+  <p class="text-muted">No incoming requests.</p>
+<% else %>
+  <% @incoming.each do |sr| %>
+    <div class="card mb-2 p-3 d-flex flex-row justify-content-between align-items-center">
+      <div>
+        <strong><%= sr.service.title %></strong> &middot; <%= sr.service.duration %> credit(s)<br>
+        <small>Requested by <strong><%= sr.requester.name %></strong> on <%= sr.created_at.strftime("%Y-%m-%d") %></small>
+      </div>
+      <div class="d-flex gap-2 align-items-center">
+        <span class="badge bg-<%= status_badge_class(sr.status) %>"><%= sr.status.capitalize %></span>
+        <a href="/service_requests/<%= sr.id %>" class="btn btn-sm btn-outline-primary">View</a>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<h4 class="mt-4">Outgoing — My Requests</h4>
+<% if @outgoing.empty? %>
+  <p class="text-muted">No outgoing requests.</p>
+<% else %>
+  <% @outgoing.each do |sr| %>
+    <div class="card mb-2 p-3 d-flex flex-row justify-content-between align-items-center">
+      <div>
+        <strong><%= sr.service.title %></strong> &middot; <%= sr.service.duration %> credit(s)<br>
+        <small>Requested on <%= sr.created_at.strftime("%Y-%m-%d") %></small>
+      </div>
+      <div class="d-flex gap-2 align-items-center">
+        <span class="badge bg-<%= status_badge_class(sr.status) %>"><%= sr.status.capitalize %></span>
+        <a href="/service_requests/<%= sr.id %>" class="btn btn-sm btn-outline-primary">View</a>
+      </div>
+    </div>
+  <% end %>
+<% end %>

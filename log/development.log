@@ -387,3 +387,782 @@ Processing by SessionsController#new as HTML
 Completed 200 OK in 2861ms (Views: 1079.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
 
 
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TimeBank'*/[0m
+  [1m[35m (4.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "services" /*application='TimeBank'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "services" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "description" text, "title" varchar, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL) /*application='TimeBank'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_services_on_user_id" ON "services" ("user_id") /*application='TimeBank'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" /*application='TimeBank'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "balance" integer, "created_at" datetime(6) NOT NULL, "email" varchar, "name" varchar, "password_digest" varchar, "role" varchar, "updated_at" datetime(6) NOT NULL) /*application='TimeBank'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys /*application='TimeBank'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys /*application='TimeBank'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON /*application='TimeBank'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys = OFF /*application='TimeBank'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='TimeBank'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aservices" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "description" text, "title" varchar, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL) /*application='TimeBank'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_aservices_on_user_id" ON "aservices" ("user_id") /*application='TimeBank'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "aservices" ("id","created_at","description","title","updated_at","user_id")
+                     SELECT "id","created_at","description","title","updated_at","user_id" FROM "services" /*application='TimeBank'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "services" /*application='TimeBank'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "services" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "description" text, "title" varchar, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL, CONSTRAINT "fk_rails_51a813203f"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='TimeBank'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_services_on_user_id" ON "services" ("user_id") /*application='TimeBank'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "services" ("id","created_at","description","title","updated_at","user_id")
+                     SELECT "id","created_at","description","title","updated_at","user_id" FROM "aservices" /*application='TimeBank'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "aservices" /*application='TimeBank'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='TimeBank'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0 /*application='TimeBank'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys = 1 /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '196fcc7930c3cd3f7bbe3d29a0ad674d4f3f0301', '2026-04-22 21:33:42.835940', '2026-04-22 21:33:42.835947') RETURNING "key" /*application='TimeBank'*/[0m
+  [1m[35m (4.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "services" /*application='TimeBank'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "services" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "description" text, "title" varchar, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL) /*application='TimeBank'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_services_on_user_id" ON "services" ("user_id") /*application='TimeBank'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" /*application='TimeBank'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "balance" integer, "created_at" datetime(6) NOT NULL, "email" varchar, "name" varchar, "password_digest" varchar, "role" varchar, "updated_at" datetime(6) NOT NULL) /*application='TimeBank'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys /*application='TimeBank'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys /*application='TimeBank'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON /*application='TimeBank'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF /*application='TimeBank'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='TimeBank'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aservices" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "description" text, "title" varchar, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL) /*application='TimeBank'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_aservices_on_user_id" ON "aservices" ("user_id") /*application='TimeBank'*/[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "aservices" ("id","created_at","description","title","updated_at","user_id")
+                     SELECT "id","created_at","description","title","updated_at","user_id" FROM "services" /*application='TimeBank'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE "services" /*application='TimeBank'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "services" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "description" text, "title" varchar, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL, CONSTRAINT "fk_rails_51a813203f"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='TimeBank'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_services_on_user_id" ON "services" ("user_id") /*application='TimeBank'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "services" ("id","created_at","description","title","updated_at","user_id")
+                     SELECT "id","created_at","description","title","updated_at","user_id" FROM "aservices" /*application='TimeBank'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "aservices" /*application='TimeBank'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='TimeBank'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0 /*application='TimeBank'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1 /*application='TimeBank'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20260326064049) /*application='TimeBank'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20260325201503); /*application='TimeBank'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2026-04-22 21:33:43.057803', '2026-04-22 21:33:43.057808') RETURNING "key" /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.2ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2026-04-22 21:33:43.068643' WHERE "ar_internal_metadata"."key" = 'environment' /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '196fcc7930c3cd3f7bbe3d29a0ad674d4f3f0301', '2026-04-22 21:33:43.088003', '2026-04-22 21:33:43.088010') RETURNING "key" /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+Migrating to AddDurationToServices (20260420000001)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='TimeBank'*/[0m
+  [1m[35m (2.8ms)[0m  [1m[35mALTER TABLE "services" ADD "duration" integer DEFAULT 1 NOT NULL /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20260420000001') RETURNING "version" /*application='TimeBank'*/[0m
+  [1m[36mTRANSACTION (3.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='TimeBank'*/[0m
+Migrating to CreateServiceRequests (20260420000002)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='TimeBank'*/[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "service_requests" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "service_id" integer NOT NULL, "requester_id" integer NOT NULL, "status" varchar DEFAULT 'pending' NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_1d08cc9767"
+FOREIGN KEY ("service_id")
+  REFERENCES "services" ("id")
+, CONSTRAINT "fk_rails_8205161223"
+FOREIGN KEY ("requester_id")
+  REFERENCES "users" ("id")
+) /*application='TimeBank'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_service_requests_on_service_id" ON "service_requests" ("service_id") /*application='TimeBank'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_service_requests_on_requester_id" ON "service_requests" ("requester_id") /*application='TimeBank'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_service_requests_on_status" ON "service_requests" ("status") /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20260420000002') RETURNING "version" /*application='TimeBank'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='TimeBank'*/[0m
+Migrating to CreateTransactions (20260420000003)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='TimeBank'*/[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "service_request_id" integer NOT NULL, "amount" integer NOT NULL, "transaction_type" varchar NOT NULL, "description" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_77364e6416"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_d3a38b0169"
+FOREIGN KEY ("service_request_id")
+  REFERENCES "service_requests" ("id")
+) /*application='TimeBank'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_user_id" ON "transactions" ("user_id") /*application='TimeBank'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_service_request_id" ON "transactions" ("service_request_id") /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20260420000003') RETURNING "version" /*application='TimeBank'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'admin@timebank.local' LIMIT 1 /*application='TimeBank'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='TimeBank'*/[0m
+  [1m[36mUser Exists? (3.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('admin@timebank.local') LIMIT 1 /*application='TimeBank'*/[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("balance", "created_at", "email", "name", "password_digest", "role", "updated_at") VALUES (0, '2026-04-22 21:34:09.219726', 'admin@timebank.local', 'Admin', '$2a$12$0.pcaGWur89c8jAXqAjbD.lR4uQtrpijKFarBl.nY3GuwUxc9yxBu', 'admin', '2026-04-22 21:34:09.219726') RETURNING "id" /*application='TimeBank'*/[0m
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='TimeBank'*/[0m
+Started GET "/" for 127.0.0.1 at 2026-04-22 23:34:19 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='TimeBank'*/[0m
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 75.0ms | GC: 0.0ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='new',application='TimeBank',controller='sessions'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendered layout layouts/application.html.erb (Duration: 228.8ms | GC: 0.0ms)
+Completed 200 OK in 696ms (Views: 279.8ms | ActiveRecord: 8.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2026-04-22 23:34:25 +0200
+Processing by SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "email" => "[FILTERED]", "password" => "[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'admin@timebank.local' LIMIT 1 /*action='create',application='TimeBank',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:6:in 'SessionsController#create'
+Redirected to http://127.0.0.1:3000/profile
+↳ app/controllers/sessions_controller.rb:10:in 'SessionsController#create'
+Completed 302 Found in 491ms (ActiveRecord: 1.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2026-04-22 23:34:26 +0200
+Processing by PagesController#profile as TURBO_STREAM
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='profile',application='TimeBank',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/profile.html.erb within layouts/application
+  Rendered pages/profile.html.erb within layouts/application (Duration: 1.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.7ms | GC: 0.0ms)
+Completed 200 OK in 49ms (Views: 16.3ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/service_requests" for 127.0.0.1 at 2026-04-22 23:34:28 +0200
+Processing by ServiceRequestsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='service_requests'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering service_requests/index.html.erb within layouts/application
+  [1m[36mServiceRequest Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "service_requests" INNER JOIN "services" ON "services"."id" = "service_requests"."service_id" LEFT OUTER JOIN "users" ON "users"."id" = "service_requests"."requester_id" WHERE "services"."user_id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='service_requests'*/[0m
+  ↳ app/views/service_requests/index.html.erb:5
+  [1m[36mServiceRequest Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "service_requests" WHERE "service_requests"."requester_id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='service_requests'*/[0m
+  ↳ app/views/service_requests/index.html.erb:23
+  Rendered service_requests/index.html.erb within layouts/application (Duration: 67.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 72.5ms | GC: 0.0ms)
+Completed 200 OK in 306ms (Views: 80.1ms | ActiveRecord: 3.4ms (3 queries, 0 cached) | GC: 46.9ms)
+
+
+Started GET "/services" for 127.0.0.1 at 2026-04-22 23:34:29 +0200
+Processing by ServicesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering services/index.html.erb within layouts/application
+  [1m[36mService Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "services" LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:16
+  Rendered services/index.html.erb within layouts/application (Duration: 7.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.3ms | GC: 15.6ms)
+Completed 200 OK in 53ms (Views: 24.3ms | ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 15.6ms)
+
+
+Started GET "/services/new" for 127.0.0.1 at 2026-04-22 23:34:30 +0200
+Processing by ServicesController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='new',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering services/new.html.erb within layouts/application
+  Rendered services/new.html.erb within layouts/application (Duration: 1.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.3ms | GC: 0.0ms)
+Completed 200 OK in 43ms (Views: 7.8ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/services" for 127.0.0.1 at 2026-04-22 23:34:33 +0200
+Processing by ServicesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "service" => {"title" => "asd", "description" => "", "duration" => "1"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering services/new.html.erb within layouts/application
+  Rendered services/new.html.erb within layouts/application (Duration: 2.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.2ms | GC: 0.0ms)
+Completed 422 Unprocessable Content in 97ms (Views: 8.3ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/services" for 127.0.0.1 at 2026-04-22 23:34:35 +0200
+Processing by ServicesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "service" => {"title" => "asd", "description" => "a", "duration" => "1"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:26:in 'ServicesController#create'
+  [1m[36mService Create (9.7ms)[0m  [1m[32mINSERT INTO "services" ("created_at", "description", "title", "updated_at", "user_id", "duration") VALUES ('2026-04-22 21:34:36.043559', 'a', 'asd', '2026-04-22 21:34:36.043559', 1, 1) RETURNING "id" /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:26:in 'ServicesController#create'
+  [1m[36mTRANSACTION (20.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:26:in 'ServicesController#create'
+Redirected to http://127.0.0.1:3000/services/1
+↳ app/controllers/services_controller.rb:27:in 'ServicesController#create'
+Completed 302 Found in 84ms (ActiveRecord: 30.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/services/1" for 127.0.0.1 at 2026-04-22 23:34:36 +0200
+Processing by ServicesController#show as TURBO_STREAM
+  Parameters: {"id" => "1"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  [1m[36mService Load (0.4ms)[0m  [1m[34mSELECT "services".* FROM "services" WHERE "services"."id" = 1 LIMIT 1 /*action='show',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:52:in 'ServicesController#set_service'
+  [1m[36mServiceRequest Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "service_requests" WHERE "service_requests"."service_id" = 1 AND "service_requests"."requester_id" = 1 AND "service_requests"."status" IN ('pending', 'accepted') LIMIT 1 /*action='show',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:15:in 'ServicesController#show'
+  Rendering layout layouts/application.html.erb
+  Rendering services/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1[0m
+  ↳ app/views/services/show.html.erb:8
+  Rendered services/show.html.erb within layouts/application (Duration: 13.5ms | GC: 15.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 17.3ms | GC: 15.6ms)
+Completed 200 OK in 63ms (Views: 19.5ms | ActiveRecord: 1.4ms (4 queries, 1 cached) | GC: 15.6ms)
+
+
+Started GET "/services" for 127.0.0.1 at 2026-04-22 23:34:37 +0200
+Processing by ServicesController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering services/index.html.erb within layouts/application
+  [1m[36mService Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "services" LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:16
+  [1m[36mService Load (0.5ms)[0m  [1m[34mSELECT "services".* FROM "services" ORDER BY "services"."created_at" DESC /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  Rendered services/index.html.erb within layouts/application (Duration: 95.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 99.7ms | GC: 0.0ms)
+Completed 200 OK in 134ms (Views: 101.6ms | ActiveRecord: 2.0ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/services/new" for 127.0.0.1 at 2026-04-22 23:34:39 +0200
+Processing by ServicesController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='new',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering services/new.html.erb within layouts/application
+  Rendered services/new.html.erb within layouts/application (Duration: 0.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.7ms | GC: 0.0ms)
+Completed 200 OK in 34ms (Views: 7.0ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/services" for 127.0.0.1 at 2026-04-22 23:34:42 +0200
+Processing by ServicesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "service" => {"title" => "b", "description" => "b", "duration" => "1"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:26:in 'ServicesController#create'
+  [1m[36mService Create (7.8ms)[0m  [1m[32mINSERT INTO "services" ("created_at", "description", "title", "updated_at", "user_id", "duration") VALUES ('2026-04-22 21:34:42.502756', 'b', 'b', '2026-04-22 21:34:42.502756', 1, 1) RETURNING "id" /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:26:in 'ServicesController#create'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:26:in 'ServicesController#create'
+Redirected to http://127.0.0.1:3000/services/2
+↳ app/controllers/services_controller.rb:27:in 'ServicesController#create'
+Completed 302 Found in 57ms (ActiveRecord: 8.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/services/2" for 127.0.0.1 at 2026-04-22 23:34:42 +0200
+Processing by ServicesController#show as TURBO_STREAM
+  Parameters: {"id" => "2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  [1m[36mService Load (0.3ms)[0m  [1m[34mSELECT "services".* FROM "services" WHERE "services"."id" = 2 LIMIT 1 /*action='show',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:52:in 'ServicesController#set_service'
+  [1m[36mServiceRequest Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "service_requests" WHERE "service_requests"."service_id" = 2 AND "service_requests"."requester_id" = 1 AND "service_requests"."status" IN ('pending', 'accepted') LIMIT 1 /*action='show',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:15:in 'ServicesController#show'
+  Rendering layout layouts/application.html.erb
+  Rendering services/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1[0m
+  ↳ app/views/services/show.html.erb:8
+  Rendered services/show.html.erb within layouts/application (Duration: 7.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.9ms | GC: 0.0ms)
+Completed 200 OK in 60ms (Views: 19.7ms | ActiveRecord: 0.9ms (4 queries, 1 cached) | GC: 15.6ms)
+
+
+Started DELETE "/logout" for 127.0.0.1 at 2026-04-22 23:34:43 +0200
+Processing by SessionsController#destroy as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]"}
+Redirected to http://127.0.0.1:3000/login
+↳ app/controllers/sessions_controller.rb:19:in 'SessionsController#destroy'
+Completed 302 Found in 29ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2026-04-22 23:34:43 +0200
+Processing by SessionsController#new as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.0ms | GC: 0.0ms)
+Completed 200 OK in 34ms (Views: 16.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2026-04-22 23:34:44 +0200
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 5.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.9ms | GC: 15.6ms)
+Completed 200 OK in 50ms (Views: 28.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 15.6ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2026-04-22 23:34:49 +0200
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 1.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.9ms | GC: 15.6ms)
+Completed 200 OK in 43ms (Views: 14.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 15.6ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2026-04-22 23:34:50 +0200
+Processing by SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "email" => "[FILTERED]", "password" => "[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = '' LIMIT 1 /*action='create',application='TimeBank',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:6:in 'SessionsController#create'
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.0ms | GC: 0.0ms)
+Completed 422 Unprocessable Content in 47ms (Views: 8.3ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/register" for 127.0.0.1 at 2026-04-22 23:34:51 +0200
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 1.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | GC: 0.0ms)
+Completed 200 OK in 26ms (Views: 7.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2026-04-22 23:34:59 +0200
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "user" => {"name" => "Test", "email" => "[FILTERED]", "password" => "[FILTERED]"}}
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='TimeBank',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:11:in 'UsersController#create'
+  [1m[36mUser Exists? (13.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('test@test.com') LIMIT 1 /*action='create',application='TimeBank',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:11:in 'UsersController#create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TRANSACTION /*action='create',application='TimeBank',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:11:in 'UsersController#create'
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 2.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.2ms | GC: 0.0ms)
+Completed 422 Unprocessable Content in 571ms (Views: 10.4ms | ActiveRecord: 16.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2026-04-22 23:35:05 +0200
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "user" => {"name" => "Test", "email" => "[FILTERED]", "password" => "[FILTERED]"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='TimeBank',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:11:in 'UsersController#create'
+  [1m[36mUser Exists? (8.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('test@test.com') LIMIT 1 /*action='create',application='TimeBank',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:11:in 'UsersController#create'
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("balance", "created_at", "email", "name", "password_digest", "role", "updated_at") VALUES (10, '2026-04-22 21:35:06.173600', 'test@test.com', 'Test', '$2a$12$SFQ9Q6aHSuY/dC7f.EthH.E32Zs3WL3Zq7W2ezdbfU0fvYaOMdT6G', 'user', '2026-04-22 21:35:06.173600') RETURNING "id" /*action='create',application='TimeBank',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:11:in 'UsersController#create'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='TimeBank',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:11:in 'UsersController#create'
+Redirected to http://127.0.0.1:3000/login
+↳ app/controllers/users_controller.rb:12:in 'UsersController#create'
+Completed 302 Found in 558ms (ActiveRecord: 9.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2026-04-22 23:35:06 +0200
+Processing by SessionsController#new as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.4ms | GC: 0.0ms)
+Completed 200 OK in 29ms (Views: 8.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2026-04-22 23:35:09 +0200
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.3ms | GC: 0.0ms)
+Completed 200 OK in 28ms (Views: 10.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2026-04-22 23:35:16 +0200
+Processing by SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "email" => "[FILTERED]", "password" => "[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'test@test.com' LIMIT 1 /*action='create',application='TimeBank',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:6:in 'SessionsController#create'
+Redirected to http://127.0.0.1:3000/profile
+↳ app/controllers/sessions_controller.rb:10:in 'SessionsController#create'
+Completed 302 Found in 604ms (ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2026-04-22 23:35:17 +0200
+Processing by PagesController#profile as TURBO_STREAM
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='profile',application='TimeBank',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/profile.html.erb within layouts/application
+  Rendered pages/profile.html.erb within layouts/application (Duration: 0.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.3ms | GC: 0.0ms)
+Completed 200 OK in 37ms (Views: 6.4ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/services" for 127.0.0.1 at 2026-04-22 23:35:19 +0200
+Processing by ServicesController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering services/index.html.erb within layouts/application
+  [1m[36mService Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "services" LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:16
+  [1m[36mService Load (0.4ms)[0m  [1m[34mSELECT "services".* FROM "services" ORDER BY "services"."created_at" DESC /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  Rendered services/index.html.erb within layouts/application (Duration: 27.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 31.1ms | GC: 0.0ms)
+Completed 200 OK in 58ms (Views: 31.0ms | ActiveRecord: 2.1ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/services/new" for 127.0.0.1 at 2026-04-22 23:35:21 +0200
+Processing by ServicesController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='new',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering services/new.html.erb within layouts/application
+  Rendered services/new.html.erb within layouts/application (Duration: 0.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.6ms | GC: 0.0ms)
+Completed 200 OK in 36ms (Views: 8.9ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/services" for 127.0.0.1 at 2026-04-22 23:35:25 +0200
+Processing by ServicesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "service" => {"title" => "test", "description" => "test", "duration" => "1"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:26:in 'ServicesController#create'
+  [1m[36mService Create (7.7ms)[0m  [1m[32mINSERT INTO "services" ("created_at", "description", "title", "updated_at", "user_id", "duration") VALUES ('2026-04-22 21:35:25.572861', 'test', 'test', '2026-04-22 21:35:25.572861', 2, 1) RETURNING "id" /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:26:in 'ServicesController#create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:26:in 'ServicesController#create'
+Redirected to http://127.0.0.1:3000/services/3
+↳ app/controllers/services_controller.rb:27:in 'ServicesController#create'
+Completed 302 Found in 54ms (ActiveRecord: 8.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/services/3" for 127.0.0.1 at 2026-04-22 23:35:25 +0200
+Processing by ServicesController#show as TURBO_STREAM
+  Parameters: {"id" => "3"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='show',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  [1m[36mService Load (0.8ms)[0m  [1m[34mSELECT "services".* FROM "services" WHERE "services"."id" = 3 LIMIT 1 /*action='show',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:52:in 'ServicesController#set_service'
+  [1m[36mServiceRequest Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "service_requests" WHERE "service_requests"."service_id" = 3 AND "service_requests"."requester_id" = 2 AND "service_requests"."status" IN ('pending', 'accepted') LIMIT 1 /*action='show',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:15:in 'ServicesController#show'
+  Rendering layout layouts/application.html.erb
+  Rendering services/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1[0m
+  ↳ app/views/services/show.html.erb:8
+  Rendered services/show.html.erb within layouts/application (Duration: 6.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.0ms | GC: 0.0ms)
+Completed 200 OK in 47ms (Views: 12.4ms | ActiveRecord: 1.5ms (4 queries, 1 cached) | GC: 0.0ms)
+
+
+Started GET "/services" for 127.0.0.1 at 2026-04-22 23:35:27 +0200
+Processing by ServicesController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering services/index.html.erb within layouts/application
+  [1m[36mService Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "services" LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:16
+  [1m[36mService Load (1.1ms)[0m  [1m[34mSELECT "services".* FROM "services" ORDER BY "services"."created_at" DESC /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (2, 1) /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  Rendered services/index.html.erb within layouts/application (Duration: 30.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 35.7ms | GC: 0.0ms)
+Completed 200 OK in 67ms (Views: 37.8ms | ActiveRecord: 2.1ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2026-04-22 23:35:28 +0200
+Processing by PagesController#profile as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='profile',application='TimeBank',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/profile.html.erb within layouts/application
+  Rendered pages/profile.html.erb within layouts/application (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.3ms | GC: 0.0ms)
+Completed 200 OK in 32ms (Views: 7.5ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/logout" for 127.0.0.1 at 2026-04-22 23:35:30 +0200
+Processing by SessionsController#destroy as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]"}
+Redirected to http://127.0.0.1:3000/login
+↳ app/controllers/sessions_controller.rb:19:in 'SessionsController#destroy'
+Completed 302 Found in 25ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2026-04-22 23:35:30 +0200
+Processing by SessionsController#new as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.1ms | GC: 0.0ms)
+Completed 200 OK in 32ms (Views: 9.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2026-04-22 23:35:35 +0200
+Processing by SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "email" => "[FILTERED]", "password" => "[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'admin@timebank.local' LIMIT 1 /*action='create',application='TimeBank',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:6:in 'SessionsController#create'
+Redirected to http://127.0.0.1:3000/profile
+↳ app/controllers/sessions_controller.rb:10:in 'SessionsController#create'
+Completed 302 Found in 566ms (ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2026-04-22 23:35:36 +0200
+Processing by PagesController#profile as TURBO_STREAM
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='profile',application='TimeBank',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/profile.html.erb within layouts/application
+  Rendered pages/profile.html.erb within layouts/application (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.1ms | GC: 0.0ms)
+Completed 200 OK in 36ms (Views: 6.0ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/service_requests" for 127.0.0.1 at 2026-04-22 23:35:37 +0200
+Processing by ServiceRequestsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='service_requests'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering service_requests/index.html.erb within layouts/application
+  [1m[36mServiceRequest Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "service_requests" INNER JOIN "services" ON "services"."id" = "service_requests"."service_id" LEFT OUTER JOIN "users" ON "users"."id" = "service_requests"."requester_id" WHERE "services"."user_id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='service_requests'*/[0m
+  ↳ app/views/service_requests/index.html.erb:5
+  [1m[36mServiceRequest Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "service_requests" WHERE "service_requests"."requester_id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='service_requests'*/[0m
+  ↳ app/views/service_requests/index.html.erb:23
+  Rendered service_requests/index.html.erb within layouts/application (Duration: 9.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 15.6ms | GC: 0.0ms)
+Completed 200 OK in 47ms (Views: 17.9ms | ActiveRecord: 1.2ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/services" for 127.0.0.1 at 2026-04-22 23:35:37 +0200
+Processing by ServicesController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering services/index.html.erb within layouts/application
+  [1m[36mService Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "services" LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:16
+  [1m[36mService Load (0.9ms)[0m  [1m[34mSELECT "services".* FROM "services" ORDER BY "services"."created_at" DESC /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (2, 1) /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  Rendered services/index.html.erb within layouts/application (Duration: 21.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 24.1ms | GC: 0.0ms)
+Completed 200 OK in 54ms (Views: 24.2ms | ActiveRecord: 2.3ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/services/3" for 127.0.0.1 at 2026-04-22 23:35:39 +0200
+Processing by ServicesController#destroy as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "id" => "3"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='destroy',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  [1m[36mService Load (0.6ms)[0m  [1m[34mSELECT "services".* FROM "services" WHERE "services"."id" = 3 LIMIT 1 /*action='destroy',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:52:in 'ServicesController#set_service'
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='destroy',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:56:in 'ServicesController#authorize_owner!'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='destroy',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:45:in 'ServicesController#destroy'
+  [1m[36mServiceRequest Load (8.7ms)[0m  [1m[34mSELECT "service_requests".* FROM "service_requests" WHERE "service_requests"."service_id" = 3 /*action='destroy',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:45:in 'ServicesController#destroy'
+  [1m[36mService Destroy (0.3ms)[0m  [1m[31mDELETE FROM "services" WHERE "services"."id" = 3 /*action='destroy',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:45:in 'ServicesController#destroy'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='destroy',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/services_controller.rb:45:in 'ServicesController#destroy'
+Redirected to http://127.0.0.1:3000/services
+↳ app/controllers/services_controller.rb:46:in 'ServicesController#destroy'
+Completed 302 Found in 116ms (ActiveRecord: 11.5ms (5 queries, 0 cached) | GC: 31.3ms)
+
+
+Started GET "/services" for 127.0.0.1 at 2026-04-22 23:35:39 +0200
+Processing by ServicesController#index as TURBO_STREAM
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering services/index.html.erb within layouts/application
+  [1m[36mService Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "services" LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:16
+  [1m[36mService Load (0.3ms)[0m  [1m[34mSELECT "services".* FROM "services" ORDER BY "services"."created_at" DESC /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  Rendered services/index.html.erb within layouts/application (Duration: 20.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 23.6ms | GC: 0.0ms)
+Completed 200 OK in 54ms (Views: 25.4ms | ActiveRecord: 1.3ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2026-04-22 23:35:49 +0200
+Processing by PagesController#profile as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='profile',application='TimeBank',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/profile.html.erb within layouts/application
+  Rendered pages/profile.html.erb within layouts/application (Duration: 0.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.0ms | GC: 0.0ms)
+Completed 200 OK in 32ms (Views: 4.8ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2026-04-22 23:35:51 +0200
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.3ms | GC: 0.0ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='new',application='TimeBank',controller='sessions'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendered layout layouts/application.html.erb (Duration: 11.9ms | GC: 0.0ms)
+Completed 200 OK in 36ms (Views: 14.8ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/services" for 127.0.0.1 at 2026-04-22 23:35:52 +0200
+Processing by ServicesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering services/index.html.erb within layouts/application
+  [1m[36mService Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "services" LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:16
+  [1m[36mService Load (0.6ms)[0m  [1m[34mSELECT "services".* FROM "services" ORDER BY "services"."created_at" DESC /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  Rendered services/index.html.erb within layouts/application (Duration: 20.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 23.5ms | GC: 0.0ms)
+Completed 200 OK in 55ms (Views: 25.3ms | ActiveRecord: 1.6ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2026-04-22 23:35:54 +0200
+Processing by PagesController#profile as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='profile',application='TimeBank',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/profile.html.erb within layouts/application
+  Rendered pages/profile.html.erb within layouts/application (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.4ms | GC: 0.0ms)
+Completed 200 OK in 33ms (Views: 8.7ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2026-04-22 23:35:54 +0200
+Processing by PagesController#profile as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='profile',application='TimeBank',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/profile.html.erb within layouts/application
+  Rendered pages/profile.html.erb within layouts/application (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.9ms | GC: 0.0ms)
+Completed 200 OK in 40ms (Views: 11.8ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/profile/edit" for 127.0.0.1 at 2026-04-22 23:35:57 +0200
+Processing by PagesController#edit as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='edit',application='TimeBank',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/edit.html.erb within layouts/application
+  Rendered pages/edit.html.erb within layouts/application (Duration: 2.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.8ms | GC: 0.0ms)
+Completed 200 OK in 41ms (Views: 9.9ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/profile/edit" for 127.0.0.1 at 2026-04-22 23:35:57 +0200
+Processing by PagesController#edit as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='edit',application='TimeBank',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/edit.html.erb within layouts/application
+  Rendered pages/edit.html.erb within layouts/application (Duration: 2.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.7ms | GC: 0.0ms)
+Completed 200 OK in 42ms (Views: 11.8ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2026-04-22 23:36:00 +0200
+Processing by PagesController#profile as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='profile',application='TimeBank',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/profile.html.erb within layouts/application
+  Rendered pages/profile.html.erb within layouts/application (Duration: 0.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.4ms | GC: 0.0ms)
+Completed 200 OK in 32ms (Views: 8.8ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/transactions" for 127.0.0.1 at 2026-04-22 23:36:01 +0200
+Processing by TransactionsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='transactions'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering transactions/index.html.erb within layouts/application
+  [1m[36mTransaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" WHERE "transactions"."user_id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='transactions'*/[0m
+  ↳ app/views/transactions/index.html.erb:6
+  Rendered transactions/index.html.erb within layouts/application (Duration: 5.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.2ms | GC: 0.0ms)
+Completed 200 OK in 73ms (Views: 19.9ms | ActiveRecord: 1.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/service_requests" for 127.0.0.1 at 2026-04-22 23:36:02 +0200
+Processing by ServiceRequestsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='service_requests'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering service_requests/index.html.erb within layouts/application
+  [1m[36mServiceRequest Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "service_requests" INNER JOIN "services" ON "services"."id" = "service_requests"."service_id" LEFT OUTER JOIN "users" ON "users"."id" = "service_requests"."requester_id" WHERE "services"."user_id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='service_requests'*/[0m
+  ↳ app/views/service_requests/index.html.erb:5
+  [1m[36mServiceRequest Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "service_requests" WHERE "service_requests"."requester_id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='service_requests'*/[0m
+  ↳ app/views/service_requests/index.html.erb:23
+  Rendered service_requests/index.html.erb within layouts/application (Duration: 15.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 19.0ms | GC: 0.0ms)
+Completed 200 OK in 46ms (Views: 18.9ms | ActiveRecord: 2.7ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/services" for 127.0.0.1 at 2026-04-22 23:36:03 +0200
+Processing by ServicesController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering services/index.html.erb within layouts/application
+  [1m[36mService Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "services" LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:16
+  [1m[36mService Load (0.4ms)[0m  [1m[34mSELECT "services".* FROM "services" ORDER BY "services"."created_at" DESC /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  Rendered services/index.html.erb within layouts/application (Duration: 27.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 32.0ms | GC: 0.0ms)
+Completed 200 OK in 61ms (Views: 33.6ms | ActiveRecord: 1.6ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/services" for 127.0.0.1 at 2026-04-23 10:37:08 +0200
+Processing by ServicesController#index as HTML
+  [1m[36mUser Load (24.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering services/index.html.erb within layouts/application
+  [1m[36mService Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "services" LIMIT 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:16
+  [1m[36mService Load (0.7ms)[0m  [1m[34mSELECT "services".* FROM "services" ORDER BY "services"."created_at" DESC /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 /*action='index',application='TimeBank',controller='services'*/[0m
+  ↳ app/views/services/index.html.erb:19
+  Rendered services/index.html.erb within layouts/application (Duration: 55.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 70.9ms | GC: 0.0ms)
+Completed 200 OK in 259ms (Views: 83.4ms | ActiveRecord: 25.7ms (4 queries, 0 cached) | GC: 0.0ms)
+
+

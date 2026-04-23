@@ -1,0 +1,43 @@
+<a href="/service_requests" class="btn btn-secondary mb-3">&larr; All Requests</a>
+
+<div class="card p-4">
+  <h3>Service Request #<%= @service_request.id %></h3>
+
+  <p><strong>Service:</strong> <a href="/services/<%= @service_request.service.id %>"><%= @service_request.service.title %></a></p>
+  <p><strong>Duration / Cost:</strong> <%= @service_request.service.duration %> credit(s)</p>
+  <p><strong>Provider:</strong> <%= @service_request.provider.name %></p>
+  <p><strong>Requester:</strong> <%= @service_request.requester.name %></p>
+  <p><strong>Status:</strong> <span class="badge bg-<%= status_badge_class(@service_request.status) %>"><%= @service_request.status.capitalize %></span></p>
+  <p><strong>Requested:</strong> <%= @service_request.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+
+  <div class="d-flex gap-2 mt-3">
+    <% if current_user == @service_request.provider %>
+      <% if @service_request.pending? %>
+        <form action="/service_requests/<%= @service_request.id %>/accept" method="post">
+          <input type="hidden" name="_method" value="patch">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <button class="btn btn-success">Accept</button>
+        </form>
+        <form action="/service_requests/<%= @service_request.id %>/reject" method="post">
+          <input type="hidden" name="_method" value="patch">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <button class="btn btn-danger">Reject</button>
+        </form>
+      <% elsif @service_request.accepted? %>
+        <form action="/service_requests/<%= @service_request.id %>/complete" method="post">
+          <input type="hidden" name="_method" value="patch">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <button class="btn btn-primary">Mark Complete &amp; Transfer Credits</button>
+        </form>
+      <% end %>
+    <% end %>
+
+    <% if (current_user == @service_request.provider || current_user == @service_request.requester) && (@service_request.pending? || @service_request.accepted?) %>
+      <form action="/service_requests/<%= @service_request.id %>/cancel" method="post">
+        <input type="hidden" name="_method" value="patch">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <button class="btn btn-outline-danger" onclick="return confirm('Cancel this request?')">Cancel Request</button>
+      </form>
+    <% end %>
+  </div>
+</div>

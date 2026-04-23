@@ -1,0 +1,30 @@
+<h2>Transaction History</h2>
+
+<p>Current Balance: <strong><%= current_user.balance %> credit(s)</strong></p>
+
+<% if @transactions.empty? %>
+  <p class="text-muted">No transactions yet.</p>
+<% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @transactions.each do |txn| %>
+        <tr>
+          <td><%= txn.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= txn.description %></td>
+          <td class="<%= txn.amount.positive? ? 'text-success' : 'text-danger' %>">
+            <%= txn.amount.positive? ? "+#{txn.amount}" : txn.amount %>
+          </td>
+          <td><%= txn.transaction_type.capitalize %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

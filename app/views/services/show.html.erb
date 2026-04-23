@@ -1,0 +1,30 @@
+<a href="/services" class="btn btn-secondary mb-3">&larr; All Services</a>
+
+<div class="card p-4">
+  <h2><%= @service.title %></h2>
+  <p><%= @service.description %></p>
+  <p><strong>Duration / Cost:</strong> <%= @service.duration %> credit(s)</p>
+  <p><strong>Offered by:</strong> <%= @service.user.name %></p>
+  <p class="text-muted"><small>Listed <%= @service.created_at.strftime("%Y-%m-%d") %></small></p>
+
+  <% if @service.user == current_user || current_user.role == "admin" %>
+    <div class="d-flex gap-2 mt-2">
+      <a href="/services/<%= @service.id %>/edit" class="btn btn-primary">Edit</a>
+      <form action="/services/<%= @service.id %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <button class="btn btn-danger" onclick="return confirm('Delete this service?')">Delete</button>
+      </form>
+    </div>
+  <% elsif @already_requested %>
+    <button class="btn btn-secondary" disabled>Already Requested</button>
+  <% elsif current_user.balance < @service.duration %>
+    <button class="btn btn-secondary" disabled>Insufficient Balance (need <%= @service.duration %>, have <%= current_user.balance %>)</button>
+  <% else %>
+    <form action="/service_requests" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <input type="hidden" name="service_id" value="<%= @service.id %>">
+      <button class="btn btn-success">Request this Service (<%= @service.duration %> credit(s))</button>
+    </form>
+  <% end %>
+</div>

@@ -1,11 +1,11 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+gardening:
+  title: Gardening
+  description: I will help with your garden for one hour.
+  duration: 1
+  user: alice
 
-one:
-  title: MyString
-  description: MyText
-  user: one
-
-two:
-  title: MyString
-  description: MyText
-  user: two
+tutoring:
+  title: Math Tutoring
+  description: One hour of math tutoring for high school level.
+  duration: 2
+  user: bob
