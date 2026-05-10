@@ -1,11 +1,23 @@
-<h2>Welcome, <%= current_user.name %></h2>
-
-<div class="card mt-3" style="max-width: 480px;">
-  <div class="card-body">
-    <p class="mb-1"><strong>Email:</strong> <%= current_user.email %></p>
-    <p class="mb-1"><strong>Balance:</strong> <%= current_user.balance %> credit(s)</p>
-    <p class="mb-0"><strong>Role:</strong> <%= current_user.role.capitalize %></p>
-  </div>
+<div class="welcome-banner">
+  <h2>Welcome, <%= current_user.name %>!</h2>
+  <p class="balance-info">Your balance: <strong><%= current_user.balance %> credits</strong></p>
 </div>
 
-<a href="/profile/edit" class="btn btn-primary mt-3">Edit Profile</a>
+<div class="quick-links">
+  <a href="/services" class="quick-link-card">
+    <div class="ql-icon">🔍</div>
+    <div class="ql-label">Browse Services</div>
+  </a>
+  <a href="/service_requests" class="quick-link-card">
+    <div class="ql-icon">📋</div>
+    <div class="ql-label">My Requests</div>
+  </a>
+  <a href="/transactions" class="quick-link-card">
+    <div class="ql-icon">💳</div>
+    <div class="ql-label">Transactions</div>
+  </a>
+  <a href="/profile/edit" class="quick-link-card">
+    <div class="ql-icon">👤</div>
+    <div class="ql-label">Edit Profile</div>
+  </a>
+</div>

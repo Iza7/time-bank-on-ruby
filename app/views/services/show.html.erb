@@ -1,30 +1,99 @@
 <a href="/services" class="btn btn-secondary mb-3">&larr; All Services</a>
 
-<div class="card p-4">
-  <h2><%= @service.title %></h2>
-  <p><%= @service.description %></p>
-  <p><strong>Duration / Cost:</strong> <%= @service.duration %> credit(s)</p>
-  <p><strong>Offered by:</strong> <%= @service.user.name %></p>
-  <p class="text-muted"><small>Listed <%= @service.created_at.strftime("%Y-%m-%d") %></small></p>
+<div style="display:grid; grid-template-columns: 1fr 300px; gap:20px; align-items:start;">
 
-  <% if @service.user == current_user || current_user.role == "admin" %>
-    <div class="d-flex gap-2 mt-2">
-      <a href="/services/<%= @service.id %>/edit" class="btn btn-primary">Edit</a>
-      <form action="/services/<%= @service.id %>" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <button class="btn btn-danger" onclick="return confirm('Delete this service?')">Delete</button>
-      </form>
+  <%# Left — service info %>
+  <div>
+    <div class="card p-4" style="margin-bottom:16px;">
+      <h2 style="font-size:20px; font-weight:700; margin-bottom:8px;"><%= @service.title %></h2>
+      <p style="color:var(--gray-600); margin-bottom:16px;"><%= @service.description %></p>
+
+      <div style="display:flex; gap:16px; flex-wrap:wrap; margin-bottom:16px;">
+        <span style="font-size:13px; color:var(--gray-500);">
+          ⏱ Duration: <strong><%= @service.duration %> hour<%= @service.duration == 1 ? '' : 's' %></strong>
+        </span>
+        <span style="font-size:13px; color:var(--gray-500);">
+          📅 Listed: <strong><%= @service.created_at.strftime("%Y-%m-%d") %></strong>
+        </span>
+      </div>
+
+      <% if @service.user == current_user || current_user.admin? %>
+        <div class="d-flex gap-2">
+          <a href="/services/<%= @service.id %>/edit" class="btn btn-outline-primary btn-sm">Edit</a>
+          <form action="/services/<%= @service.id %>" method="post" style="display:inline">
+            <input type="hidden" name="_method" value="delete">
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            <button class="btn btn-outline-danger btn-sm" onclick="return confirm('Delete this service?')">Delete</button>
+          </form>
+        </div>
+      <% elsif @already_requested %>
+        <button class="btn btn-secondary" disabled>Already Requested</button>
+      <% elsif current_user.balance < @service.duration %>
+        <div style="background:#FDF6B2; border:1px solid #F3D675; border-radius:8px; padding:12px 16px;">
+          <p style="font-size:13px; color:#723B13; margin:0;">
+            ⚠️ Insufficient balance — you need <strong><%= @service.duration %> credits</strong> but have <strong><%= current_user.balance %></strong>.
+            <a href="/buy-credits" style="color:var(--primary); font-weight:600;">Buy Credits</a>
+          </p>
+        </div>
+      <% else %>
+        <form action="/service_requests" method="post">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <input type="hidden" name="service_id" value="<%= @service.id %>">
+          <button class="btn btn-primary">Request this Service (<%= @service.duration %> credit<%= @service.duration == 1 ? '' : 's' %>)</button>
+        </form>
+      <% end %>
     </div>
-  <% elsif @already_requested %>
-    <button class="btn btn-secondary" disabled>Already Requested</button>
-  <% elsif current_user.balance < @service.duration %>
-    <button class="btn btn-secondary" disabled>Insufficient Balance (need <%= @service.duration %>, have <%= current_user.balance %>)</button>
-  <% else %>
-    <form action="/service_requests" method="post">
-      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-      <input type="hidden" name="service_id" value="<%= @service.id %>">
-      <button class="btn btn-success">Request this Service (<%= @service.duration %> credit(s))</button>
-    </form>
-  <% end %>
+
+    <%# Reviews section %>
+    <% reviews = @service.service_requests.joins(:review).includes(review: :reviewer).map(&:review).compact %>
+    <div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h4 style="font-size:16px; font-weight:600; margin:0;">Reviews (<%= reviews.count %>)</h4>
+        <% if reviews.any? %>
+          <% avg = (reviews.sum(&:rating).to_f / reviews.count).round(1) %>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span style="font-size:18px; color:#F59E0B;">
+              <% avg.round.times do %>&#9733;<% end %>
+              <% (5 - avg.round).times do %><span style="color:var(--gray-300);">&#9733;</span><% end %>
+            </span>
+            <span style="font-size:14px; font-weight:600; color:var(--gray-700);"><%= avg %> / 5</span>
+          </div>
+        <% end %>
+      </div>
+
+      <% if reviews.empty? %>
+        <div class="card" style="text-align:center; padding:32px; color:var(--gray-400);">
+          No reviews yet for this service.
+        </div>
+      <% else %>
+        <% reviews.each do |review| %>
+          <div class="card" style="padding:16px 20px; margin-bottom:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span style="font-weight:600; font-size:14px;"><%= review.reviewer.name %></span>
+              <div style="font-size:16px; color:#F59E0B;">
+                <% review.rating.times do %>&#9733;<% end %>
+                <% (5 - review.rating).times do %><span style="color:var(--gray-300);">&#9733;</span><% end %>
+              </div>
+            </div>
+            <p style="font-size:13px; color:var(--gray-600); margin-bottom:4px;"><%= review.body %></p>
+            <p style="font-size:11px; color:var(--gray-400); margin:0;"><%= review.created_at.strftime("%d %B %Y") %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <%# Right — provider card %>
+  <div class="card" style="padding:20px; text-align:center;">
+    <div style="width:56px; height:56px; background:var(--primary-light); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-size:22px; font-weight:700; color:var(--primary);">
+      <%= @service.user.name.first.upcase %>
+    </div>
+    <h5 style="font-size:15px; font-weight:600; margin-bottom:4px;"><%= @service.user.name %></h5>
+    <p style="font-size:12px; color:var(--gray-400); margin-bottom:12px;">Member since <%= @service.user.created_at.strftime("%Y-%m-%d") %></p>
+    <p style="font-size:13px; color:var(--gray-600); margin-bottom:16px;">
+      Total services: <strong><%= @service.user.services.count %></strong>
+    </p>
+    <a href="/services?q=<%= @service.user.name %>" class="btn btn-outline-secondary btn-sm" style="width:100%;">View all services</a>
+  </div>
+
 </div>

@@ -27,7 +27,7 @@
 
   <body>
     <!-- Responsive navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md">
       <div class="container">
         <a class="navbar-brand fw-bold" href="/">Time Bank</a>
 
@@ -49,24 +49,27 @@
               <li class="nav-item">
                 <a class="nav-link" href="/transactions">Transactions</a>
               </li>
-              <% if current_user.role == "admin" %>
+              <li class="nav-item">
+                <a class="nav-link" href="/buy-credits">Buy Credits</a>
+              </li>
+              <% if current_user.admin? %>
                 <li class="nav-item">
                   <a class="nav-link text-warning" href="/admin/users">Admin</a>
                 </li>
               <% end %>
             </ul>
-            <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-              <li class="nav-item">
-                <a class="nav-link" href="/profile">
+            <ul class="navbar-nav ms-auto mb-2 mb-md-0 align-items-center">
+              <li class="nav-item me-2">
+                <a class="nav-link d-flex align-items-center gap-2" href="/profile">
                   <%= current_user.name %>
-                  <span class="badge bg-secondary ms-1"><%= current_user.balance %> cr</span>
+                  <span class="balance-badge"><%= current_user.balance %> cr</span>
                 </a>
               </li>
               <li class="nav-item">
                 <form action="/logout" method="post" class="d-inline">
                   <input type="hidden" name="_method" value="delete">
                   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                  <button class="btn btn-sm btn-outline-light ms-2">Logout</button>
+                  <button class="btn-logout">Logout</button>
                 </form>
               </li>
             </ul>
@@ -109,5 +112,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmk48CZPPHBkHus0b2uBkQ7UNRv"
             crossorigin="anonymous"></script>
+    <footer class="site-footer">
+      &copy; 2025 Time Bank. All rights reserved.
+    </footer>
   </body>
 </html>

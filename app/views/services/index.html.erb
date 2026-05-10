@@ -1,9 +1,10 @@
-<h2>Services</h2>
+<div class="section-header">
+  <h1 class="page-title" style="margin-bottom:0">Services</h1>
+  <a class="btn btn-primary" href="/services/new">+ Offer a Service</a>
+</div>
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <a class="btn btn-success" href="/services/new">Offer a Service</a>
-
-  <form action="/services" method="get" class="d-flex gap-2">
+<div class="search-bar">
+  <form action="/services" method="get" class="d-flex gap-2" style="flex:1">
     <input class="form-control" type="text" name="q" value="<%= params[:q] %>" placeholder="Search services...">
     <button class="btn btn-outline-secondary">Search</button>
     <% if params[:q].present? %>
@@ -13,25 +14,27 @@
 </div>
 
 <% if @services.empty? %>
-  <p class="text-muted">No services found.</p>
+  <div class="card" style="text-align:center; padding:40px; color:var(--gray-400)">
+    No services found.
+  </div>
 <% else %>
   <% @services.each do |service| %>
-    <div class="card mb-2 p-3">
-      <div class="d-flex justify-content-between">
-        <div>
-          <h5><a href="/services/<%= service.id %>"><%= service.title %></a></h5>
-          <p class="text-muted mb-1"><%= service.description %></p>
-          <small>Offered by <strong><%= service.user.name %></strong> &middot; <%= service.duration %> credit(s)</small>
-        </div>
-        <% if service.user == current_user || current_user.role == "admin" %>
-          <div class="d-flex gap-2 align-items-start">
-            <a href="/services/<%= service.id %>/edit" class="btn btn-sm btn-outline-primary">Edit</a>
-            <form action="/services/<%= service.id %>" method="post">
-              <input type="hidden" name="_method" value="delete">
-              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-              <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this service?')">Delete</button>
-            </form>
-          </div>
+    <div class="service-card">
+      <div>
+        <h5><a href="/services/<%= service.id %>"><%= service.title %></a></h5>
+        <p class="meta mb-0"><%= service.description.truncate(80) %></p>
+        <p class="meta">Offered by <strong><%= service.user.name %></strong></p>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <span class="credit-badge"><%= service.duration %> credit<%= service.duration == 1 ? '' : 's' %></span>
+        <a href="/services/<%= service.id %>" class="btn btn-outline-primary btn-sm">View Details</a>
+        <% if service.user == current_user || current_user.admin? %>
+          <a href="/services/<%= service.id %>/edit" class="btn btn-outline-secondary btn-sm">Edit</a>
+          <form action="/services/<%= service.id %>" method="post" style="display:inline">
+            <input type="hidden" name="_method" value="delete">
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            <button class="btn btn-outline-danger btn-sm" onclick="return confirm('Delete this service?')">Delete</button>
+          </form>
         <% end %>
       </div>
     </div>

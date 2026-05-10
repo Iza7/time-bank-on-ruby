@@ -1,36 +1,36 @@
-<h2>Service Requests</h2>
+<h1 class="page-title">My Requests</h1>
 
-<h4 class="mt-4">Incoming — Requests for My Services</h4>
+<div class="section-title mb-3">Incoming — Requests for My Services</div>
 <% if @incoming.empty? %>
-  <p class="text-muted">No incoming requests.</p>
+  <div class="card" style="color:var(--gray-400); text-align:center; padding:24px">No incoming requests.</div>
 <% else %>
   <% @incoming.each do |sr| %>
-    <div class="card mb-2 p-3 d-flex flex-row justify-content-between align-items-center">
+    <div class="request-card">
       <div>
-        <strong><%= sr.service.title %></strong> &middot; <%= sr.service.duration %> credit(s)<br>
-        <small>Requested by <strong><%= sr.requester.name %></strong> on <%= sr.created_at.strftime("%Y-%m-%d") %></small>
+        <div style="font-weight:600; font-size:14px; margin-bottom:2px"><%= sr.service.title %> &middot; <span class="credit-badge"><%= sr.service.duration %> cr</span></div>
+        <div class="meta" style="font-size:12px; color:var(--gray-500)">Requested by <strong><%= sr.requester.name %></strong> on <%= sr.created_at.strftime("%Y-%m-%d") %></div>
       </div>
       <div class="d-flex gap-2 align-items-center">
         <span class="badge bg-<%= status_badge_class(sr.status) %>"><%= sr.status.capitalize %></span>
-        <a href="/service_requests/<%= sr.id %>" class="btn btn-sm btn-outline-primary">View</a>
+        <a href="/service_requests/<%= sr.id %>" class="btn btn-outline-primary btn-sm">View</a>
       </div>
     </div>
   <% end %>
 <% end %>
 
-<h4 class="mt-4">Outgoing — My Requests</h4>
+<div class="section-title mt-4 mb-3">Outgoing — My Requests</div>
 <% if @outgoing.empty? %>
-  <p class="text-muted">No outgoing requests.</p>
+  <div class="card" style="color:var(--gray-400); text-align:center; padding:24px">No outgoing requests.</div>
 <% else %>
   <% @outgoing.each do |sr| %>
-    <div class="card mb-2 p-3 d-flex flex-row justify-content-between align-items-center">
+    <div class="request-card">
       <div>
-        <strong><%= sr.service.title %></strong> &middot; <%= sr.service.duration %> credit(s)<br>
-        <small>Requested on <%= sr.created_at.strftime("%Y-%m-%d") %></small>
+        <div style="font-weight:600; font-size:14px; margin-bottom:2px"><%= sr.service.title %> &middot; <span class="credit-badge"><%= sr.service.duration %> cr</span></div>
+        <div style="font-size:12px; color:var(--gray-500)">Provider: <strong><%= sr.service.user.name %></strong> &middot; <%= sr.created_at.strftime("%Y-%m-%d") %></div>
       </div>
       <div class="d-flex gap-2 align-items-center">
         <span class="badge bg-<%= status_badge_class(sr.status) %>"><%= sr.status.capitalize %></span>
-        <a href="/service_requests/<%= sr.id %>" class="btn btn-sm btn-outline-primary">View</a>
+        <a href="/service_requests/<%= sr.id %>" class="btn btn-outline-primary btn-sm">View</a>
       </div>
     </div>
   <% end %>

@@ -11,7 +11,17 @@
 /tmp/
 
 # Used by dotenv library to load environment variables.
-# .env
+.env
+.env.*
+!.env.example
+
+# Local Rails/runtime artifacts.
+/log/*.log
+/storage/*.sqlite3
+/storage/*.sqlite3-*
+
+# Local Stripe CLI binary.
+/stripe.exe
 
 # Ignore Byebug command history file.
 .byebug_history

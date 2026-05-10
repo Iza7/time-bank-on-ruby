@@ -27,12 +27,36 @@ Rails.application.routes.draw do
     end
   end
 
+  # Web — reviews
+  resources :reviews, only: [:create]
+
   # Web — transaction history
   resources :transactions, only: [:index]
 
+  # Buy credits
+  get  '/buy-credits', to: 'payments#new'
+  post '/buy-credits', to: 'payments#create'
+
+  # Webhooks
+  namespace :webhooks do
+    post 'stripe', to: 'stripe#create'
+  end
+
   # Web — admin
   namespace :admin do
-    resources :users, only: %i[index show]
+    resources :users, only: %i[index show] do
+      member do
+        patch :toggle_active
+      end
+    end
+
+    resources :services, only: [:index, :destroy] do
+      member do
+        patch :toggle_visible
+      end
+    end
+
+    resources :transactions, only: [:index]
   end
 
   # API v1
@@ -52,6 +76,8 @@ Rails.application.routes.draw do
         end
       end
       resources :transactions, only: [:index]
+      resources :payments, only: [:create]
+      resources :reviews, only: [:create]
     end
   end
 end

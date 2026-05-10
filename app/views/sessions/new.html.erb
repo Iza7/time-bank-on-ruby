@@ -1,16 +1,25 @@
-<h2>Login</h2>
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h2>Welcome Back!</h2>
+    <p class="auth-subtitle">Login to your account</p>
 
-<% if flash[:alert] %>
-  <div class="alert alert-danger"><%= flash[:alert] %></div>
-<% end %>
+    <form action="/login" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
-<form action="/login" method="post">
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="mb-2">
+        <label>Email</label>
+        <input class="form-control" type="email" name="email" placeholder="you@example.com">
+      </div>
+      <div class="mb-3">
+        <label>Password</label>
+        <input class="form-control" type="password" name="password" placeholder="••••••••">
+      </div>
 
-  <input class="form-control mb-2" type="email" name="email" placeholder="Email">
-  <input class="form-control mb-2" type="password" name="password" placeholder="Password">
+      <button class="btn btn-primary" style="width:100%">Login</button>
+    </form>
 
-  <button class="btn btn-success">Login</button>
-</form>
-
-<a href="/register">Create account</a>
+    <p style="text-align:center; margin-top:16px; font-size:13px; color:var(--gray-500)">
+      Don't have an account? <a href="/register" style="color:var(--primary); font-weight:500">Register</a>
+    </p>
+  </div>
+</div>

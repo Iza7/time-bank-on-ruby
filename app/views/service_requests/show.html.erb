@@ -41,3 +41,73 @@
     <% end %>
   </div>
 </div>
+
+<%# ── REVIEW SECTION ── %>
+<% if @service_request.completed? %>
+  <div style="margin-top: 24px;">
+
+    <% if @service_request.review.present? %>
+      <%# Show existing review %>
+      <div class="card" style="border-left: 4px solid var(--primary); padding: 20px 24px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <h5 style="margin:0; font-size:15px; font-weight:600;">Review</h5>
+          <div style="font-size:20px; color:#F59E0B;">
+            <% @service_request.review.rating.times do %>&#9733;<% end %>
+            <% (5 - @service_request.review.rating).times do %><span style="color:var(--gray-300);">&#9733;</span><% end %>
+          </div>
+        </div>
+        <p style="color:var(--gray-700); font-size:14px; margin-bottom:8px;"><%= @service_request.review.body %></p>
+        <p style="color:var(--gray-400); font-size:12px; margin:0;">
+          Written by <strong><%= @service_request.review.reviewer.name %></strong>
+          on <%= @service_request.review.created_at.strftime("%d %B %Y") %>
+        </p>
+      </div>
+
+    <% elsif current_user == @service_request.requester %>
+      <%# Show review form for requester %>
+      <div class="card" style="padding: 20px 24px;">
+        <h5 style="font-size:15px; font-weight:600; margin-bottom:16px;">Leave a Review</h5>
+
+        <form action="/reviews" method="post">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <input type="hidden" name="service_request_id" value="<%= @service_request.id %>">
+
+          <div style="margin-bottom:16px;">
+            <label style="display:block; margin-bottom:8px; font-size:13px; font-weight:500;">Rating</label>
+            <div style="display:flex; gap:8px;">
+              <% [1,2,3,4,5].each do |star| %>
+                <label style="cursor:pointer; font-size:28px; color:#F59E0B;">
+                  <input type="radio" name="rating" value="<%= star %>" style="display:none;" required>
+                  &#9733;
+                </label>
+              <% end %>
+            </div>
+            <p style="font-size:11px; color:var(--gray-400); margin-top:4px;">Click a star to select your rating</p>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <label style="display:block; margin-bottom:6px; font-size:13px; font-weight:500;">Your Review</label>
+            <textarea name="body" class="form-control" rows="4"
+              placeholder="Describe your experience with this service..."
+              required></textarea>
+          </div>
+
+          <button class="btn btn-primary">Submit Review</button>
+        </form>
+      </div>
+
+      <script>
+        // Star rating visual feedback
+        document.querySelectorAll('input[name="rating"]').forEach(function(radio) {
+          radio.addEventListener('change', function() {
+            var val = parseInt(this.value);
+            document.querySelectorAll('input[name="rating"]').forEach(function(r, i) {
+              r.parentElement.style.color = (i < val) ? '#F59E0B' : '#D1D5DB';
+            });
+          });
+        });
+      </script>
+    <% end %>
+
+  </div>
+<% end %>

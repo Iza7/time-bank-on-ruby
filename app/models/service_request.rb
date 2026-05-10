@@ -4,6 +4,7 @@ class ServiceRequest < ApplicationRecord
   belongs_to :service
   belongs_to :requester, class_name: "User", inverse_of: :service_requests
   has_many   :transactions, dependent: :destroy
+  has_one    :review
 
   validates :status, inclusion: { in: STATUSES }
   validate  :cannot_request_own_service

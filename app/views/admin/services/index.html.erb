@@ -1,0 +1,40 @@
+<h1 class="page-title">Service Moderation</h1>
+
+<div class="table-card">
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>User</th>
+        <th>Duration</th>
+        <th>Visible</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @services.each do |service| %>
+        <tr>
+          <td><strong><%= service.title %></strong></td>
+          <td><%= service.user.name %></td>
+          <td><span class="credit-badge"><%= service.duration %> hr</span></td>
+          <td>
+            <span class="badge bg-<%= service.visible? ? 'success' : 'secondary' %>">
+              <%= service.visible? ? 'Visible' : 'Hidden' %>
+            </span>
+          </td>
+          <td class="d-flex gap-2">
+            <%= button_to service.visible? ? 'Hide' : 'Show',
+                toggle_visible_admin_service_path(service),
+                method: :patch,
+                class: "btn btn-sm #{service.visible? ? 'btn-outline-secondary' : 'btn-success'}" %>
+            <%= button_to 'Remove',
+                admin_service_path(service),
+                method: :delete,
+                data: { confirm: 'Are you sure?' },
+                class: "btn btn-sm btn-outline-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

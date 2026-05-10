@@ -12,4 +12,10 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 8 }, allow_nil: true
   validates :role,     inclusion: { in: %w[user admin] }
   validates :balance,  numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  has_many :payments
+  has_many :reviews, foreign_key: :reviewer_id
+
+  def admin?
+    self[:admin] || role == "admin"
+  end
 end

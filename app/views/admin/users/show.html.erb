@@ -6,4 +6,4 @@
 <p><strong>Balance:</strong> <%= @user.balance %> hours</p>
 <p><strong>Joined:</strong> <%= @user.created_at.strftime("%Y-%m-%d %H:%M") %></p>
 
-<a href="/admin/users" class="btn btn-secondary">Back to users</a>
+<%= link_to "Back to users", admin_users_path, class: "btn btn-secondary" %>

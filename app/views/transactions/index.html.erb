@@ -1,30 +1,41 @@
-<h2>Transaction History</h2>
-
-<p>Current Balance: <strong><%= current_user.balance %> credit(s)</strong></p>
+<div class="section-header">
+  <h1 class="page-title" style="margin-bottom:0">Transaction History</h1>
+  <span class="balance-badge" style="font-size:13px; padding:6px 14px">Balance: <%= current_user.balance %> credits</span>
+</div>
 
 <% if @transactions.empty? %>
-  <p class="text-muted">No transactions yet.</p>
+  <div class="card" style="text-align:center; padding:40px; color:var(--gray-400)">No transactions yet.</div>
 <% else %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Description</th>
-        <th>Amount</th>
-        <th>Type</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @transactions.each do |txn| %>
+  <div class="table-card">
+    <table>
+      <thead>
         <tr>
-          <td><%= txn.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-          <td><%= txn.description %></td>
-          <td class="<%= txn.amount.positive? ? 'text-success' : 'text-danger' %>">
-            <%= txn.amount.positive? ? "+#{txn.amount}" : txn.amount %>
-          </td>
-          <td><%= txn.transaction_type.capitalize %></td>
+          <th>Date</th>
+          <th>Type</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Credits</th>
+          <th>Description</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @transactions.each do |txn| %>
+          <tr>
+            <td><%= txn.created_at.strftime("%Y-%m-%d") %></td>
+            <td>
+              <span class="badge bg-<%= txn.amount.positive? ? 'success' : 'danger' %>">
+                <%= txn.amount.positive? ? 'Earned' : 'Spent' %>
+              </span>
+            </td>
+            <td><%= txn.service_request&.requester&.name || "—" %></td>
+            <td><%= txn.service_request&.provider&.name || "—" %></td>
+            <td style="font-weight:600; color:<%= txn.amount.positive? ? 'var(--success)' : 'var(--danger)' %>">
+              <%= txn.amount.positive? ? "+#{txn.amount}" : txn.amount %>
+            </td>
+            <td><%= txn.description %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% end %>
